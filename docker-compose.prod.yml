@@ -13,7 +13,7 @@ services:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     ports:
       - ${PORT}:3000
-    command: node dist/main.js
+    command: npm run start:prod
 
   postgres:
     environment:
