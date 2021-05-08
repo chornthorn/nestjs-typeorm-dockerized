@@ -2,24 +2,20 @@ version: '3'
 services:
   nginx:
     ports:
-      - '8090:80'
+      - 80:80
   node-app:
     build:
       context: .
       args:
         NODE_ENV: production
     environment:
-      - NODE_ENV=production
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=my_db_prod
-      - JWT_SECRET=secret
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     ports:
-      - 4000:3000
+      - ${PORT}:3000
     command: npm run start:prod
 
   postgres:
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: my_db_prod
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
