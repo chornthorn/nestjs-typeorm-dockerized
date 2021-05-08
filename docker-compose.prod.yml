@@ -9,6 +9,7 @@ services:
       args:
         NODE_ENV: production
     environment:
+      NODE_ENV: production
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
     ports:
       - ${PORT}:3000
