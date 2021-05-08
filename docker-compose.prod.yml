@@ -1,0 +1,25 @@
+version: '3'
+services:
+  nginx:
+    ports:
+      - '8090:80'
+  node-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=my_db_prod
+      - JWT_SECRET=secret
+    ports:
+      - 4000:3000
+    command: npm run start:prod
+
+  postgres:
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_db_prod
